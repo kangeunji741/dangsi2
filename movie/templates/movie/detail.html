@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        /* 영화 포스터 카드 스타일 */
+        .movie-card {
+            margin-bottom: 1vh;
+            align-items: flex-start;
+        }
+
+        .card {
+            flex-direction: row;
+        }
+        .movie-poster {
+            max-width: 15vh;
+            height: auto;
+
+        }
+
+        .movie-info {
+            margin-top:1vh;
+            flex: 1;
+        }
+
+        /* 페이지 전체를 가운데 정렬 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+
+        @media (max-width: 768px) {
+            /* 스마트폰 화면 크기에 맞춰서 포스터 크기를 조정 */
+            .movie-poster {
+                max-width: 150px;
+                text-align:center;
+                margin-bottom: 2.5vh;
+            }
+        }
+        p {
+            margin: 0px 0px 0px 0px; line-height: 120%;
+        }
+        .dummy {
+            width: 100%; /* 컨테이너의 너비를 100%로 설정 */
+            height: 10vh;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+
+                <div class="col-12">
+                    <div class="card movie-card ">
+                            <img class="movie-poster col-6" src="{{ movie.poster.url }}" alt="Movie Poster">
+                        <div class="movie-info col-">
+                            <h1 style="color:#FFD600; margin: 0px 0px 0px 0px;">★★★★★</h1>
+                            <h2 style="color:#FF4FED">★★★★★</h2>
+                            <h1>{{ movie.title }}</h1>
+                            <h2>{{ movie.release_date|date:"Y.m.d" }}</h2>
+                            <h3>{{ movie.genre }}</h3>
+                            <h4>{{ movie.cast }}</h4>
+                        </div>
+
+                    </div>
+                </div>
+            <div class="dummy">
+
+            </div>
+        </div>
+
+        <!-- 여기까지가 메인 포스터
+        이제 영화 정보랑 내 평가 작은 버튼으로 만들고 js로 버튼 누를떄마다 요소가 바뀌게 해야 함.
+        영화 정보 ->줄거리, 다른 관객 평-
+        내 평가 -> 내가 남긴 평가 없으면, 걍 등록된 평이 없디고 해야게ㅛ다.,,ㅎ->
+    /div>
+
+{% endblock %}

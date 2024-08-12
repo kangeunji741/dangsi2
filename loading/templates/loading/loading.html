@@ -1,0 +1,60 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading Page</title>
+    <style>
+        /* 로딩 페이지 스타일 */
+        body {
+            margin: 0;
+            height: 100vh; /* 화면 높이 전체를 차지하도록 설정 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column; /* Display child elements in a column */
+            align-items: center;
+        }
+
+        .loading img {
+            width: 40vh;
+            height: 40vh;
+            padding: 10px;
+        }
+
+        .loader {
+            border: 1vh solid #f3f3f3; /* 회색 경계선 */
+            border-top: 1vh solid #3498db; /* 파란색 경계선(로딩 바) */
+            border-radius: 50%;
+            width: 10vh;
+            height: 10vh;
+            animation: spin 2s linear infinite; /* 회전 애니메이션 적용 */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="loading-container">
+        <div class="loading"><img src="{% static 'loading.png' %}" alt="메인로고"></div>
+        <div class="loader"></div>
+        <p style="font-size:400%;">loading...</p>
+    </div>
+
+    <script>
+        // 로딩 페이지가 로드된 후 2초 후에 메인 페이지로 이동하는 함수
+        setTimeout(function() {
+            window.location.href = '/login/'; //로그인 페이지로 이동
+        }, 3000); // 3초 후에 이동
+    </script>
+</body>
+</html>

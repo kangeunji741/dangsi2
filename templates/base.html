@@ -1,0 +1,176 @@
+{% load static %}
+
+
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>당시</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body {
+        margin: 0; /* 기본 margin 제거 */
+    }
+    footer {
+        margin: 0; /* 기본 margin 제거 */
+    }
+
+    /* 로고 이미지를 감싸는 div 스타일 */
+    .logo {
+        position: fixed; /* 상단에 고정 */
+        z-index: 1; /* 로고를 다른 요소들 위에 배치 */
+    }
+
+    /* 로고 이미지 스타일 */
+    .logo img {
+        max-width: 25%; /* 로고 이미지의 최대 너비를 20%로 설정 */
+        margin-left:3vh;
+    }
+
+    /* 다른 요소들을 감싸는 div 스타일 */
+    .content {
+        position: fixed; /* 상단에 고정 */
+        top: 0; /* 상단에 고정 */
+        display: flex;
+        align-items: center;
+        z-index: 1; /* content를 로고와 메뉴 바 위에 배치 */
+        justify-content: center; /* 가로 가운데 정렬 */
+        border-bottom: 3px solid #4B749A;
+        background-color: #fff;
+        justify-content: space-around; /* 요소들을 양 끝으로 정렬 */
+        width: 100%; /* 컨테이너의 너비를 100%로 설정 */
+        min-height: 10%;
+    }
+    .additional {
+        margin-left: auto; /* 오른쪽 여백을 최대화하여 오른쪽에 고정 */
+        white-space: nowrap; /* 텍스트 줄바꿈 없이 한 줄로 표시 */
+    }
+
+    .container {
+        position: absolute; /* content의 높이(50px)만큼 아래로 떨어지도록 설정 */
+        top: 11vh;
+        width: 100%; /* 컨테이너의 너비를 100%로 설정 */
+        min-height: 10vh;
+    }
+
+    .menu_bar {
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: flex-end;
+        background-color: #4B749A;
+        width: 100%;
+        min-height: 10%;
+        left:0;
+    }
+
+    .menu_bar > div {
+        min-width: 200px;
+        min-height: 200px;
+        padding: 10px;
+        display: flex;
+    }
+
+    .menu_bar img {
+        height: 90%;
+
+    }
+    .form-inline {
+        margin-left:20vh;
+    }
+    #searchin{
+        width:400px;
+        height:100px;
+        border:solid 1px #4B749A;
+        z-index: 1;
+    }
+    a{
+        color:black;
+        text-decoration: none;
+    }
+    a:hover{
+         color:#4B749A;
+         text-decoration: none;
+      }
+    .btn{
+        height:100px;
+        color:#fff;
+        background-color:#4B749A;
+        z-index: 1;
+    }
+    .btn:hover{
+        background-color:#ccc;
+        border-color:#666;
+    }
+    .btn:active, .btn-outline-success:not(:disabled):not(.disabled):active, .show > .btn-outline-success.dropdown-toggle {
+        color: #fff;
+        background-color: #666;
+        border-color: #333;
+    }
+
+    /* 핸드폰 크기에 대한 미디어 쿼리 */
+    @media screen and (max-width: 480px) {
+        .content {
+            flex-direction: row; /* 요소들을 세로로 배치 */
+        }
+
+        .logo img {
+            max-width: 30%; /* 로고 이미지의 최대 너비를 핸드폰 크기로 조정 */
+            min-width: 30%; /* 로고 이미지의 최대 너비를 핸드폰 크기로 조정 */
+        }
+    }
+</style>
+</head>
+<body>
+<div class="content">
+    <div class="logo"><img src="{% static 'logo.png' %}" alt="메인로고"></div>
+    <!-- 다른 요소들을 이곳에 추가하면 됩니다 -->
+    <!-- <div class="additional">일단 검색창오른쪽에 고정하고 싶은 요소</div> -->
+    <form class="form-inline my-2 my-lg-0" action="{% url 'movie_search' %}" method="post">
+        {% csrf_token %}
+        <input id="searchin" class="form-control mr-sm-2" style="font-size:300%" type="search" aria-label="Search" name="q" value="{{q}}">
+        <button class="btn my-2 my-sm-0" type="submit"><img src="{% static 'serach.svg' %}"></button>
+    </form>
+</div>
+
+{% block content %}
+
+{% endblock %}
+<div class="container">
+</div>
+
+
+
+<footer>
+<div class="menu_bar">
+    <div class="icon">
+        <a href="{% url 'movie' %}">
+            <img src="{% static 'home.svg' %}" alt="홈페이지">
+        </a>
+    </div>
+    <div class="icon">
+        <a href="{% url 'lanking' %}">
+            <img src="{% static 'lanking.svg' %}"  alt="랭킹페이지">
+        </a>
+    </div>
+    <div class="icon">
+        <a href="{% url 'analysis' %}">
+            <img src="{% static 'analysis.svg' %}"  alt="분석페이지">
+        </a>
+    </div>
+    <div class="icon">
+        <a href="{% url 'issue' %}">
+            <img src="{% static 'issue.svg' %}"  alt="소식페이지">
+        </a>
+    </div>
+    <div class="icon">
+        <a href="{% url 'my' %}">
+            <img src="{% static 'my.svg' %}"  alt="마이페이지">
+        </a>
+    </div>
+</div>
+
+</footer>
+</body>
+</html>

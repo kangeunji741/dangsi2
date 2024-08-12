@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+        /* 영화 포스터 카드 스타일 */
+        .issue-card {
+            margin-bottom: 1vh;
+        }
+
+        .card {
+            flex-direction: col;
+        }
+        .issue-poster {
+            max-width: 100%;
+            height: auto;
+
+        }
+
+        .issue-info {
+            margin-top:1vh;
+            flex: 1;
+        }
+
+        /* 페이지 전체를 가운데 정렬 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+
+        @media (max-width: 768px) {
+            /* 스마트폰 화면 크기에 맞춰서 포스터 크기를 조정 */
+            .issue-poster {
+                max-width: 90%;
+                text-align:center;
+                margin-bottom: 2.5vh;
+            }
+        }
+        p {
+            margin: 0px 0px 0px 0px; line-height: 120%;
+        }
+        .dummy {
+            width: 100%; /* 컨테이너의 너비를 100%로 설정 */
+            height: 10vh;
+        }
+
+    </style>
+
+    <div class="container">
+        <div class="row">
+            {% for issue in issues %}
+
+                <div class="col-12">
+                    <div class="card issue-card ">
+
+                         {% if issue.issue_poster %}
+                        <div class="card-body text-right">
+                            <p style="font-size:2rem;">{{ issue.issue_date|date:"Y-m-d" }}</p>
+                        </div>
+                        <a href="{% url 'issue_detail' issue.id %}">
+                            <img class="issue-poster col-6" src="{{ issue.issue_poster.url }}" alt="Issue Poster">
+                        {% else %}
+                            <div class="card-body text-center">
+                                <h5 class="card-title">No Poster Available</h5>
+                            </div>
+                        {% endif %}
+
+                        <div class="issue-info">
+                            <h1 style="margin-left:1vh; margin-right:1vh;"><b>{{ issue.issue_title }}</b></h1>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="dummy">
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
